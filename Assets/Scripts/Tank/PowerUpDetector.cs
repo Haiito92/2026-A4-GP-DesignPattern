@@ -10,7 +10,7 @@ namespace Tanks.Complete
         // References to the tank's components
         private TankShooting m_TankShooting;
         private TankMovement m_TankMovement;
-        private TankHealth m_TankHealth;
+        private IHealth m_TankHealth;
         private PowerUpHUD m_PowerUpHUD;
 
         private void Awake()
@@ -18,7 +18,7 @@ namespace Tanks.Complete
             // Get references to the tank's movement, shooting, and health components
             m_TankShooting = GetComponent<TankShooting>();
             m_TankMovement = GetComponent<TankMovement>();
-            m_TankHealth = GetComponent<TankHealth>();
+            m_TankHealth = GetComponent<IHealth>();
             m_PowerUpHUD = GetComponentInChildren<PowerUpHUD>();
         }
 
@@ -70,7 +70,7 @@ namespace Tanks.Complete
         // Grants the tank a temporary shield if it does not already have one
         public void PickUpShield(float shieldAmount, float duration)
         {
-            if (!m_TankHealth.m_HasShield)
+            if (!m_TankHealth.HasShield)
                 StartCoroutine(ActivateShield(shieldAmount, duration));
         }
 
