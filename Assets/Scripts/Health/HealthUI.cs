@@ -22,10 +22,11 @@ namespace Tanks.Complete
 
         private void Start()
         {
-            if(!m_TankHealth) return;
-            
+            if(!m_TankHealth || !m_Slider) return;
+
             // Set the slider max value to the max health the tank can have
             m_Slider.maxValue = m_TankHealth.StartingHealth;
+            SetHealthUI();
             
             SubscribeToHealthEvent();
         }
@@ -42,6 +43,8 @@ namespace Tanks.Complete
 
         private void SetHealthUI()
         {
+            if(!m_Slider) return;
+            
             // Set the slider's value appropriately.
             m_Slider.value = m_TankHealth.CurrentHealth;
 
